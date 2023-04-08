@@ -14,5 +14,11 @@
     "eslint-config-prettier": "^8.8.0",
     "nuxt": "^3.3.3",
     "prettier": "^2.8.7"
+  },
+  "dependencies": {
+    "@trpc/client": "^10.19.1",
+    "@trpc/server": "^10.19.1",
+    "trpc-nuxt": "^0.8.0",
+    "zod": "^3.21.4"
   }
 }
