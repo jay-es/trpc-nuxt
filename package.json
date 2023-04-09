@@ -16,8 +16,10 @@
     "prettier": "^2.8.7"
   },
   "dependencies": {
+    "@nuxtjs/tailwindcss": "^6.6.5",
     "@trpc/client": "^10.19.1",
     "@trpc/server": "^10.19.1",
+    "daisyui": "^2.51.5",
     "trpc-nuxt": "^0.8.0",
     "zod": "^3.21.4"
   }
