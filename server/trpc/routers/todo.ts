@@ -23,4 +23,7 @@ export const todoRouter = router({
   toggle: publicProcedure.input(z.number()).mutation(({ input }) => {
     todoRepository.toggle(input);
   }),
+  remove: publicProcedure.input(z.number()).mutation(({ input }) => {
+    todoRepository.remove(input);
+  }),
 });

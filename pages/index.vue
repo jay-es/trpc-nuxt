@@ -1,10 +1,16 @@
 <script setup lang="ts">
 const { $client } = useNuxtApp();
 
-const { data: todos } = await $client.todo.list.useQuery();
+const { data: todos, refresh } = await $client.todo.list.useQuery();
 
 function toggle(todoId: number) {
   $client.todo.toggle.mutate(todoId);
+}
+
+function remove(todoId: number) {
+  if (!confirm("OK?")) return;
+  $client.todo.remove.mutate(todoId);
+  refresh();
 }
 </script>
 
@@ -25,6 +31,7 @@ function toggle(todoId: number) {
             <th></th>
             <th>ID</th>
             <th>Title</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -41,6 +48,14 @@ function toggle(todoId: number) {
             </td>
             <td>{{ todo.todoId }}</td>
             <td>{{ todo.title }}</td>
+            <td>
+              <button
+                class="btn btn-outline btn-primary"
+                @click="remove(todo.todoId)"
+              >
+                Remove
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>

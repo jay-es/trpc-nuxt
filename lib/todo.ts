@@ -38,7 +38,7 @@ export class TodoRepository {
     Object.assign(todo, input);
   }
 
-  delete(todoId: number) {
+  remove(todoId: number) {
     const index = this.todos.findIndex((v) => v.todoId === todoId);
 
     if (index === -1) throw new Error("ToDo がありません");
