@@ -4,7 +4,7 @@ type Todo = {
   completed: boolean;
 };
 
-type TodoInput = Omit<Todo, "todoId" | "completed">;
+export type TodoInput = Omit<Todo, "todoId" | "completed">;
 
 export class TodoRepository {
   private todos: Todo[] = [];

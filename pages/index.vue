@@ -11,6 +11,13 @@ function toggle(todoId: number) {
 <template>
   <div>
     <h1 class="text-4xl font-bold mb-4">ToDo List</h1>
+
+    <p class="my-4">
+      <nuxt-link href="/new" class="link link-primary">
+        Create new ToDo
+      </nuxt-link>
+    </p>
+
     <div class="overflow-x-auto">
       <table class="table w-full">
         <thead>
