@@ -1,4 +1,4 @@
-type Todo = {
+export type Todo = {
   todoId: number;
   title: string;
   completed: boolean;

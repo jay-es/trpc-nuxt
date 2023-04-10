@@ -7,19 +7,17 @@ const todoRepository = new TodoRepository();
 
 lorem.split(/\n/).forEach((title) => todoRepository.add({ title }));
 
+const todoInput = z.object({
+  title: z.string(),
+});
+
 export const todoRouter = router({
   list: publicProcedure.query(() => {
     return todoRepository.list();
   }),
-  add: publicProcedure
-    .input(
-      z.object({
-        title: z.string(),
-      })
-    )
-    .mutation(({ input }) => {
-      return todoRepository.add(input);
-    }),
+  add: publicProcedure.input(todoInput).mutation(({ input }) => {
+    return todoRepository.add(input);
+  }),
   toggle: publicProcedure.input(z.number()).mutation(({ input }) => {
     todoRepository.toggle(input);
   }),
