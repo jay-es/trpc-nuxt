@@ -48,7 +48,13 @@ function remove(todoId: number) {
             </td>
             <td>{{ todo.todoId }}</td>
             <td>{{ todo.title }}</td>
-            <td>
+            <td class="space-x-2">
+              <button
+                class="btn btn-outline btn-primary"
+                @click="$router.push(`/${todo.todoId}/edit`)"
+              >
+                Edit
+              </button>
               <button
                 class="btn btn-outline btn-primary"
                 @click="remove(todo.todoId)"

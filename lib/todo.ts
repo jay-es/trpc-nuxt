@@ -14,6 +14,14 @@ export class TodoRepository {
     return this.todos;
   }
 
+  findOne(todoId: number) {
+    const todo = this.todos.find((v) => v.todoId === todoId);
+
+    if (!todo) throw new Error("ToDo がありません");
+
+    return todo;
+  }
+
   add(input: TodoInput) {
     this.todos.push({
       todoId: ++this.count,
