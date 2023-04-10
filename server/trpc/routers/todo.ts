@@ -1,8 +1,11 @@
 import { z } from "zod";
 import { publicProcedure, router } from "../trpc";
 import { TodoRepository } from "~/lib/todo";
+import { lorem } from "~/lib/lorem";
 
 const todoRepository = new TodoRepository();
+
+lorem.split(/\n/).forEach((title) => todoRepository.add({ title }));
 
 export const todoRouter = router({
   list: publicProcedure.query(() => {
