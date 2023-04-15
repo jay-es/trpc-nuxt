@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { publicProcedure, router } from "../trpc";
-import { TodoRepository } from "~/lib/todo";
-import { lorem } from "~/lib/lorem";
+import { TodoRepositoryByArray } from "~/server/repositories/todo/TodoRepositoryByArray";
+import { lorem } from "~/server/repositories/todo/lorem";
 
-const todoRepository = new TodoRepository();
+const todoRepository = new TodoRepositoryByArray();
 
 lorem.split(/\n/).forEach((title) => todoRepository.add({ title }));
 

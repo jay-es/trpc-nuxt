@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Todo, TodoInput } from "~/lib/todo";
+import type { Todo, TodoInput } from "~/server/repositories/todo/types";
 
 const props = defineProps<{
   todo?: Todo;

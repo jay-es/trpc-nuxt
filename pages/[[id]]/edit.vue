@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TodoInput } from "~/lib/todo";
+import type { TodoInput } from "~/server/repositories/todo/types";
 
 const { $client, $router } = useNuxtApp();
 const route = useRoute();

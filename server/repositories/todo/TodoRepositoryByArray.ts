@@ -1,14 +1,9 @@
-export type Todo = {
-  todoId: number;
-  title: string;
-  completed: boolean;
-  removed: boolean;
-};
+import type { Todo, TodoInput, TodoRepository } from "./types";
 
-export type TodoInput = Omit<Todo, "todoId" | "completed" | "removed">;
+type MyTodo = Todo & { removed: boolean };
 
-export class TodoRepository {
-  private todos: Todo[] = [];
+export class TodoRepositoryByArray implements TodoRepository {
+  private todos: MyTodo[] = [];
   private count = 0;
 
   list() {
