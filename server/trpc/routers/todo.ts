@@ -1,9 +1,13 @@
 import { z } from "zod";
 import { publicProcedure, router } from "../trpc";
+import { TodoRepositoryBySqlite } from "~/server/repositories/todo/TodoRepositoryBySqlite";
 import { TodoRepositoryByArray } from "~/server/repositories/todo/TodoRepositoryByArray";
 import { lorem } from "~/server/repositories/todo/lorem";
+import type { TodoRepository } from "~/server/repositories/todo/types";
 
-const todoRepository = new TodoRepositoryByArray();
+const todoRepository: TodoRepository = await TodoRepositoryBySqlite.new()
+  // fallback
+  .catch(() => new TodoRepositoryByArray());
 
 lorem.split(/\n/).forEach((title) => todoRepository.add({ title }));
 

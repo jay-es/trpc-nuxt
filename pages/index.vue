@@ -7,9 +7,9 @@ function toggle(todoId: number) {
   $client.todo.toggle.mutate(todoId);
 }
 
-function remove(todoId: number) {
+async function remove(todoId: number) {
   if (!confirm("OK?")) return;
-  $client.todo.remove.mutate(todoId);
+  await $client.todo.remove.mutate(todoId);
   refresh();
 }
 </script>

@@ -4,4 +4,12 @@ export default defineNuxtConfig({
   build: {
     transpile: ["trpc-nuxt"],
   },
+  nitro: {
+    esbuild: {
+      options: {
+        // Top-level await
+        target: "es2022",
+      },
+    },
+  },
 });

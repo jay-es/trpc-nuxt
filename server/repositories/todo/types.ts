@@ -6,11 +6,13 @@ export type Todo = {
 
 export type TodoInput = Omit<Todo, "todoId" | "completed">;
 
+type Awaitable<T> = T | Promise<T>;
+
 export interface TodoRepository {
-  list(): Todo[];
-  findOne(todoId: number): Todo;
-  add(input: TodoInput): void;
-  toggle(todoId: number): void;
-  update(todoId: number, input: TodoInput): void;
-  remove(todoId: number): void;
+  list(): Awaitable<Todo[]>;
+  findOne(todoId: number): Awaitable<Todo>;
+  add(input: TodoInput): Awaitable<void>;
+  toggle(todoId: number): Awaitable<void>;
+  update(todoId: number, input: TodoInput): Awaitable<void>;
+  remove(todoId: number): Awaitable<void>;
 }
