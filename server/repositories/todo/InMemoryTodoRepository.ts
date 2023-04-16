@@ -1,13 +1,11 @@
 import type { Todo, TodoInput, TodoRepository } from "./types";
 
-type MyTodo = Todo & { removed: boolean };
-
 export class InMemoryTodoRepository implements TodoRepository {
-  private todos: MyTodo[] = [];
+  private todos: Todo[] = [];
   private count = 0;
 
   list() {
-    return this.todos.filter((v) => !v.removed);
+    return this.todos;
   }
 
   findOne(todoId: number) {
@@ -22,7 +20,6 @@ export class InMemoryTodoRepository implements TodoRepository {
     this.todos.push({
       todoId: ++this.count,
       completed: false,
-      removed: false,
       ...input,
     });
   }
@@ -41,7 +38,8 @@ export class InMemoryTodoRepository implements TodoRepository {
 
   remove(todoId: number) {
     const todo = this.findOne(todoId);
+    const index = this.todos.indexOf(todo);
 
-    todo.removed = true;
+    this.todos.splice(index, 1);
   }
 }
