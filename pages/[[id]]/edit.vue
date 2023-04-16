@@ -5,7 +5,9 @@ const { $client, $router } = useNuxtApp();
 const route = useRoute();
 
 const todoId = Number(route.params.id);
-const { data: todo } = await $client.todo.findOne.useQuery(todoId);
+const { data: todo, error } = await $client.todo.findOne.useQuery(todoId, {
+  server: false, // クライアントからリクエストしないと、正しいエラーが表示されない
+});
 
 async function handleSubmit(input: TodoInput) {
   await $client.todo.update.mutate({ todoId, input });
@@ -14,5 +16,8 @@ async function handleSubmit(input: TodoInput) {
 </script>
 
 <template>
-  <TodoForm :todo="todo ?? undefined" @submit="handleSubmit" />
+  <div>
+    <div v-if="error" class="alert alert-error">{{ error.message }}</div>
+    <TodoForm v-if="todo" :todo="todo" @submit="handleSubmit" />
+  </div>
 </template>
