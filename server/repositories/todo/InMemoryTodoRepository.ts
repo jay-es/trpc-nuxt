@@ -2,7 +2,7 @@ import type { Todo, TodoInput, TodoRepository } from "./types";
 
 type MyTodo = Todo & { removed: boolean };
 
-export class TodoRepositoryByArray implements TodoRepository {
+export class InMemoryTodoRepository implements TodoRepository {
   private todos: MyTodo[] = [];
   private count = 0;
 

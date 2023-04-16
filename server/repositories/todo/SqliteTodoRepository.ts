@@ -8,7 +8,7 @@ interface TodoModel extends Model<Todo, TodoInput> {
   completed: boolean;
 }
 
-export class TodoRepositoryBySqlite implements TodoRepository {
+export class SqliteTodoRepository implements TodoRepository {
   private TodoModel;
 
   private constructor() {
@@ -32,8 +32,8 @@ export class TodoRepositoryBySqlite implements TodoRepository {
     });
   }
 
-  static async new(): Promise<TodoRepositoryBySqlite> {
-    const todoRepository = new TodoRepositoryBySqlite();
+  static async new(): Promise<SqliteTodoRepository> {
+    const todoRepository = new SqliteTodoRepository();
     await todoRepository.TodoModel.sync();
     return todoRepository;
   }
