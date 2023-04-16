@@ -1,15 +1,8 @@
 import { z } from "zod";
 import { publicProcedure, router } from "../trpc";
-import { SqliteTodoRepository } from "~/server/repositories/todo/SqliteTodoRepository";
-import { InMemoryTodoRepository } from "~/server/repositories/todo/InMemoryTodoRepository";
-import { lorem } from "~/server/repositories/todo/lorem";
-import type { TodoRepository } from "~/server/repositories/todo/types";
+import { createTodoRepository } from "~/server/repositories/todo";
 
-const todoRepository: TodoRepository = await SqliteTodoRepository.new()
-  // fallback
-  .catch(() => new InMemoryTodoRepository());
-
-lorem.split(/\n/).forEach((title) => todoRepository.add({ title }));
+const todoRepository = await createTodoRepository();
 
 const todoInput = z.object({
   title: z.string(),
