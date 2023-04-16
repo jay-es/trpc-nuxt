@@ -1,25 +1,22 @@
 import { z } from "zod";
 import { publicProcedure, router } from "../trpc";
-import { createTodoRepository } from "~/server/repositories/todo";
-
-const todoRepository = await createTodoRepository();
 
 const todoInput = z.object({
   title: z.string(),
 });
 
 export const todoRouter = router({
-  list: publicProcedure.query(() => {
-    return todoRepository.list();
+  list: publicProcedure.query(({ ctx }) => {
+    return ctx.todoRepository.list();
   }),
-  findOne: publicProcedure.input(z.number()).query(({ input }) => {
-    return todoRepository.findOne(input);
+  findOne: publicProcedure.input(z.number()).query(({ ctx, input }) => {
+    return ctx.todoRepository.findOne(input);
   }),
-  add: publicProcedure.input(todoInput).mutation(({ input }) => {
-    return todoRepository.add(input);
+  add: publicProcedure.input(todoInput).mutation(({ ctx, input }) => {
+    return ctx.todoRepository.add(input);
   }),
-  toggle: publicProcedure.input(z.number()).mutation(({ input }) => {
-    todoRepository.toggle(input);
+  toggle: publicProcedure.input(z.number()).mutation(({ ctx, input }) => {
+    ctx.todoRepository.toggle(input);
   }),
   update: publicProcedure
     .input(
@@ -28,10 +25,10 @@ export const todoRouter = router({
         input: todoInput,
       })
     )
-    .mutation(({ input: { todoId, input } }) => {
-      todoRepository.update(todoId, input);
+    .mutation(({ ctx, input: { todoId, input } }) => {
+      ctx.todoRepository.update(todoId, input);
     }),
-  remove: publicProcedure.input(z.number()).mutation(({ input }) => {
-    todoRepository.remove(input);
+  remove: publicProcedure.input(z.number()).mutation(({ ctx, input }) => {
+    ctx.todoRepository.remove(input);
   }),
 });

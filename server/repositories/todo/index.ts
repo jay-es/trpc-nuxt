@@ -3,10 +3,12 @@ import { SqliteTodoRepository } from "./SqliteTodoRepository";
 import { lorem } from "./lorem";
 import type { TodoRepository } from "./types";
 
+let todoRepository: TodoRepository;
+
 export const createTodoRepository = async (
   type: "InMemory" | "SQLite" = "SQLite"
 ): Promise<TodoRepository> => {
-  let todoRepository: TodoRepository;
+  if (todoRepository) return todoRepository;
 
   switch (type) {
     case "InMemory":
