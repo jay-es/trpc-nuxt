@@ -16,13 +16,12 @@ export class SqliteTodoRepository implements TodoRepository {
     this.TodoModel = sequelize.define<TodoModel>("Todo", {
       todoId: {
         type: DataTypes.INTEGER,
-        autoIncrement: true,
         primaryKey: true,
       },
       title: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         validate: {
-          min: 1,
+          len: [1, 100],
         },
       },
       completed: {

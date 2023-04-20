@@ -2,7 +2,7 @@ import { z } from "zod";
 import { publicProcedure, router } from "../trpc";
 
 const todoInput = z.object({
-  title: z.string(),
+  title: z.string().max(100),
 });
 
 export const todoRouter = router({
